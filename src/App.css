@@ -21,6 +21,12 @@ h1 {
   border-radius: 50%;
   background-color: lightblue;
 }
+.following-button {
+  background-color: green;
+}
+.following-button-text{
+  color: white;
+}
 .robot-name,
 .robot-title,
 .robot-email{

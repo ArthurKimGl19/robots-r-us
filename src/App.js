@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import data from "./data";
 import "./App.css";
+import FollowButton from "./components/FollowButton.jsx";
+import FollowingButton from "./components/FollowingButton.jsx";
 
 function App() {
   const [following, setFollowing] = useState([]);
@@ -39,11 +41,25 @@ function App() {
       <div className="robot-images-container">
         {data.map((robot) => {
           let robotName = robot.first_name + " " + robot.last_name;
-          let buttonValue, imgLink;
+          let button, imgLink;
           if (following.indexOf(robotName) !== -1) {
-            buttonValue = "Following";
+            button = <FollowingButton
+              robotName={robotName}
+              buttonValue={"Following"}
+              setFollowing={setFollowing}
+              handleRemoveFollowingClick={handleRemoveFollowingClick}
+              handleAddFollowingClick={handleAddFollowingClick}
+              following={following}
+            />;
           } else {
-            buttonValue = "Follow";
+            button = <FollowButton
+              robotName={robotName}
+              buttonValue={"Follow"}
+              setFollowing={setFollowing}
+              handleRemoveFollowingClick={handleRemoveFollowingClick}
+              handleAddFollowingClick={handleAddFollowingClick}
+              following={following}
+            />;
           }
           if (!robot.avatar) {
             imgLink =
@@ -61,26 +77,7 @@ function App() {
                 <img className="robot-image" src={imgLink} />
               </div>
               <div className="robot-name">{robotName}</div>
-              <div className="follow-button-container">
-                <button
-                  className="follow-button"
-                  value={robotName}
-                  onClick={(e) => {
-                    if (following.indexOf(e.target.value) !== -1) {
-                      let newArray = following.filter(
-                        (robotName) => robotName != e.target.value
-                      );
-                      setFollowing(newArray);
-                      handleRemoveFollowingClick(e.target.value);
-                    } else {
-                      setFollowing([...following, e.target.value]);
-                      handleAddFollowingClick(e.target.value);
-                    }
-                  }}
-                >
-                  {buttonValue}
-                </button>
-              </div>
+              <div className="follow-button-container">{button}</div>
               <div className="robot-title">{robot.title}</div>
               <div className="robot-email">{robot.email}</div>
             </div>
