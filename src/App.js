@@ -21,7 +21,7 @@ function App() {
       localStorage.setItem("following", JSON.stringify(following));
     }
   }, []);
-  const handleFollowingClick = (followingValue) => {
+  const handleAddFollowingClick = (followingValue) => {
     const followingArray = JSON.parse(localStorage.getItem("following"));
     let newArray = [...followingArray, followingValue];
     localStorage.setItem("following", JSON.stringify(newArray));
@@ -74,7 +74,7 @@ function App() {
                       handleRemoveFollowingClick(e.target.value);
                     } else {
                       setFollowing([...following, e.target.value]);
-                      handleFollowingClick(e.target.value);
+                      handleAddFollowingClick(e.target.value);
                     }
                   }}
                 >
