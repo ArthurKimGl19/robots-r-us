@@ -4,7 +4,14 @@ import "./App.css";
 
 function App() {
   const [following, setFollowing] = useState([]);
-  data.sort((a, b) => a.last_name - b.last_name)
+  data.sort((a, b) => {
+    if (a.last_name < b.last_name){
+      return -1;
+    } else {
+      return 1;
+    }
+    return 0;
+  });
   return (
     <div className="App">
       <h1>Robots-R-Us</h1>
@@ -12,11 +19,11 @@ function App() {
         {data.map((robot) => {
           let robotName = robot.first_name + " " + robot.last_name;
           let buttonValue;
-          if (following.indexOf(robotName) !== -1){
+          if (following.indexOf(robotName) !== -1) {
             buttonValue = "Following";
           } else {
             buttonValue = "Follow";
-          }        
+          }
           return (
             <div
               className="robot-card-container"
@@ -32,11 +39,13 @@ function App() {
                   className="follow-button"
                   value={robotName}
                   onClick={(e) => {
-                    if (following.indexOf(e.target.value) !== -1){
-                      let newArray = following.filter(robotName => robotName != e.target.value);
+                    if (following.indexOf(e.target.value) !== -1) {
+                      let newArray = following.filter(
+                        (robotName) => robotName != e.target.value
+                      );
                       setFollowing(newArray);
                     } else {
-                      setFollowing([...following, e.target.value])
+                      setFollowing([...following, e.target.value]);
                     }
                   }}
                 >
