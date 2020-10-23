@@ -16,7 +16,6 @@ function App() {
   });
   useEffect(() => {
     const followingArray = localStorage.getItem("following");
-    console.log("what is following", followingArray);
     if (followingArray) {
       setFollowing(JSON.parse(followingArray));
     } else {
